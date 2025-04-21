@@ -1,0 +1,102 @@
+body {
+  margin: 0;
+  overflow: hidden;
+  background: #111;
+  font-family: Arial, sans-serif;
+  color: #eee;
+}
+
+canvas {
+  background: #222;
+  display: block;
+  margin: 0 auto;
+  border: 2px solid #444;
+}
+
+#retryButton {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px 20px;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 100;
+  background: #333;
+  color: #eee;
+  border: 1px solid #555;
+}
+
+#message {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -50%);
+  font-size: 30px;
+  color: #eee;
+  z-index: 100;
+}
+
+/* Start Menu Styles */
+#startMenu {
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #eee;
+  z-index: 100;
+}
+
+#startMenu h1 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+#startButton {
+  padding: 10px 20px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* Tutorial Toggle & Guide Styles */
+#tutorialToggle {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #444;
+  color: #eee;
+  padding: 5px 10px;
+  cursor: pointer;
+  border: 1px solid #888;
+  z-index: 150;
+}
+
+#tutorialGuide {
+  position: absolute;
+  top: 40px;
+  left: 10px;
+  width: 300px;
+  background: rgba(20, 20, 20, 0.9);
+  color: #eee;
+  padding: 10px;
+  border: 1px solid #888;
+  display: none;
+  z-index: 150;
+}
+
+#tutorialGuide button {
+  margin-right: 5px;
+  cursor: pointer;
+  background: #555;
+  color: #eee;
+  border: none;
+  padding: 5px;
+}
+
+#tutorialGuide .content {
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1.4;
+}

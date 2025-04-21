@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Into the Depths</title>
+  <link rel="stylesheet" href="depths.css">
+  <style>
+    /* Hide the tutorial guide by default */
+    #tutorialGuide {
+      display: none;
+    }
+    .activeTab {
+      font-weight: bold;
+    }
+  </style>
+  <script>
+    function toggleTutorial() {
+      var guide = document.getElementById("tutorialGuide");
+      if (guide.style.display === "none" || guide.style.display === "") {
+        guide.style.display = "block";
+      } else {
+        guide.style.display = "none";
+      }
+    }
+  </script>
+</head>
+<body>
+  <canvas id="gameCanvas" width="400" height="600"></canvas>
+  <div id="message"></div>
+  <button id="retryButton">Retry</button>
+  
+  <audio id="backgroundMusic" loop>
+    <source src="cavernAmbience.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Start Menu for Into the Depths Mode -->
+  <div id="startMenu">
+    <h1>Into the Depths</h1>
+    <p>Descend into the darkness and live like a Legendary Cave Diver.</p>
+    <button id="startButton">Descend</button>
+  </div>
+  
+  <!-- Tutorial Toggle & Guide -->
+  <div id="tutorialToggle" style="cursor:pointer;" onclick="toggleTutorial()">Cave Guide</div>
+  <div id="tutorialGuide">
+    <div>
+      <button id="tabPowerup">Powerup Info</button>
+      <button id="tabPlatform">Platform Info</button>
+    </div>
+    <div id="contentPowerup" class="content">
+      <strong>Powerup Info:</strong>
+      <p>Cubes are objects in the game that do various things, like powerups.</p>
+      <p>Learn about the different Cubes in the game and their functions:</p>
+      <ul>
+        <li><em>Yellow:</em> Brightens the entire screen for 10 seconds.</li>
+        <li><em>Red:</em> Kills you on contact.</li>
+        <li><em>Orange:</em> Teleports you upwards</li>
+        <li><em>Cyan:</em> Grants you temporary invincibility.</li>
+        <li><em>Purple:</em> Teleports you to a random position.</li>
+        <li><em>Dark Blue:</em> Instantly triggers a spike wall on a random side.</li>
+        <li><em>Pink:</em> Doubles the game's speed, but weakens your jump.</li>
+        <li><em>Brown:</em> Makes you larger, heavier, and slower.</li>
+        <li><em>White:</em> ϱniʜɈჸяɘvɘ ƨɈяɘvnI</li>
+      </ul>
+    </div>
+    <div id="contentPlatform" class="content" style="display:none;">
+      <strong>Platform Info:</strong>
+      <p>There are four types of platforms:</p>
+      <ul>
+        <li><em>Normal Platforms:</em> Your average platform. Provides a solid surface for landing.</li>
+        <li><em>Moving Platforms:</em> Same appearance as a Normal Platform, but moves at alternating speeds.</li>
+        <li><em>Weak Platforms:</em> These platforms are bee-lined in appearance and break after a few seconds of you landing on them.</li>
+        <li><em>Spiked Platforms:</em> Instantly kills the player on contact.</li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- Load the game script for Into the Depths mode -->
+  <script src="depths.js"></script>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const startMenu = document.getElementById("startMenu");
+      const startButton = document.getElementById("startButton");
+      const backgroundMusic = document.getElementById("backgroundMusic");
+
+      const tabPowerup = document.getElementById("tabPowerup");
+      const tabPlatform = document.getElementById("tabPlatform");
+      const contentPowerup = document.getElementById("contentPowerup");
+      const contentPlatform = document.getElementById("contentPlatform");
+
+      tabPowerup.addEventListener("click", function() {
+        contentPowerup.style.display = "block";
+        contentPlatform.style.display = "none";
+        tabPowerup.classList.add("activeTab");
+        tabPlatform.classList.remove("activeTab");
+      });
+
+      tabPlatform.addEventListener("click", function() {
+        contentPlatform.style.display = "block";
+        contentPowerup.style.display = "none";
+        tabPlatform.classList.add("activeTab");
+        tabPowerup.classList.remove("activeTab");
+      });
+
+      startButton.addEventListener("click", function() {
+        startMenu.style.display = "none";
+        document.getElementById("tutorialToggle").style.display = "none";
+        tutorialGuide.style.display = "none";
+        backgroundMusic.play().catch(error => console.error("Playback error:", error));
+        if (typeof resetGame === "function") {
+          resetGame("descend");
+        } else {
+          console.error("resetGame function is not defined");
+        }
+      });
+    });
+  </script>
+</body>
+</html>

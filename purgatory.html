@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Purgatory Mode</title>
+  <link rel="stylesheet" href="purgatory.css">
+  <style>
+    /* Hide the tutorial guide by default */
+    #tutorialGuide {
+      display: none;
+    }
+    /* Optionally, you can style active/inactive tabs */
+    .activeTab {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="gameCanvas" width="400" height="600"></canvas>
+  <div id="message"></div>
+  <button id="retryButton">Retry</button>
+  
+  <audio id="backgroundMusic" loop>
+    <source src="Wind.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Start Menu for Purgatory Mode -->
+  <div id="startMenu">
+    <h1>Welcome to Hell.</h1>
+    <button id="startButton">Start</button>
+  </div>
+  
+  <!-- Tutorial Toggle & Guide -->
+  <div id="tutorialToggle" style="cursor:pointer;">Guide</div>
+  <div id="tutorialGuide">
+    <div>
+      <button id="tabPowerup">Cube Info</button>
+      <button id="tabPlatform">Platform Info</button>
+    </div>
+    <div id="contentPowerup" class="content">
+      <strong>Cube Info:</strong>
+      <p>Cubes are objects in the game that do various things, like powerups.</p>
+      <p>Learn about the different Cubes and their functions:</p>
+      <ul>
+        <li><em>You already know what to do.</li>
+      </ul>
+    </div>
+    <div id="contentPlatform" class="content" style="display:none;">
+      <strong>Platform Info:</strong>
+      <p>There are four types of platforms:</p>
+      <ul>
+        <li><em>You already know what to do.</li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- Load the Purgatory Mode game script -->
+  <script src="purgatory.js"></script>
+  
+  <!-- Attach event listeners after DOM and purgatory.js have loaded -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const startMenu = document.getElementById("startMenu");
+      const startButton = document.getElementById("startButton");
+      const tutorialToggle = document.getElementById("tutorialToggle");
+      const tutorialGuide = document.getElementById("tutorialGuide");
+      const backgroundMusic = document.getElementById("backgroundMusic");
+
+      // Tutorial tab buttons and content divs
+      const tabPowerup = document.getElementById("tabPowerup");
+      const tabPlatform = document.getElementById("tabPlatform");
+      const contentPowerup = document.getElementById("contentPowerup");
+      const contentPlatform = document.getElementById("contentPlatform");
+
+      // Toggle tutorial guide visibility when clicking the toggle
+      tutorialToggle.addEventListener("click", function() {
+        if (tutorialGuide.style.display === "none" || tutorialGuide.style.display === "") {
+          tutorialGuide.style.display = "block";
+        } else {
+          tutorialGuide.style.display = "none";
+        }
+      });
+
+      // When clicking Cube Info, show the powerup content and hide platform content
+      tabPowerup.addEventListener("click", function() {
+        contentPowerup.style.display = "block";
+        contentPlatform.style.display = "none";
+        // Optional: indicate active tab
+        tabPowerup.classList.add("activeTab");
+        tabPlatform.classList.remove("activeTab");
+      });
+
+      // When clicking Platform Info, show the platform content and hide powerup content
+      tabPlatform.addEventListener("click", function() {
+        contentPlatform.style.display = "block";
+        contentPowerup.style.display = "none";
+        // Optional: indicate active tab
+        tabPlatform.classList.add("activeTab");
+        tabPowerup.classList.remove("activeTab");
+      });
+
+      startButton.addEventListener("click", function() {
+        // Hide the start menu and tutorial elements when the game starts
+        startMenu.style.display = "none";
+        tutorialToggle.style.display = "none";
+        tutorialGuide.style.display = "none";
+
+        // Start playing background music
+        backgroundMusic.play().catch(error => console.error("Playback error:", error));
+
+        // Start the game by calling resetGame() from purgatory.js
+        if (typeof resetGame === "function") {
+          resetGame();
+        } else {
+          console.error("resetGame function is not defined in purgatory.js");
+        }
+      });
+    });
+  </script>
+</body>
+</html>

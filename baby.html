@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Baby Mode</title>
+  <link rel="stylesheet" href="baby.css">
+</head>
+<body>
+  <canvas id="gameCanvas" width="400" height="600"></canvas>
+  <div id="message"></div>
+  <button id="retryButton">Again!</button>
+  
+  <audio id="backgroundMusic" loop>
+    <source src="laughingbaby.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Start Menu -->
+  <div id="startMenu">
+    <h1>Goo Goo Ga Ga</h1>
+    <button id="startButton">Start Baby Mode</button>
+  </div>
+  
+  <!-- Tutorial Toggle & Guide -->
+  <div id="tutorialToggle">Tutorial</div>
+  <div id="tutorialGuide">
+    <div>
+      <button id="tabPowerup">"Book about Cubes that contain Pictures"</button>
+      <button id="tabPlatform">"Book about Platforms that contain Pictures"</button>
+    </div>
+    <div id="contentPowerup" class="content">
+      <strong>Cube Alphabet:</strong>
+      <ul>
+        <li><em>Yellow (Jump):</em> Up Up!</li>
+        <li><em>Red Orange:</em> Super Uppie!</li>
+        <li><em>Cyan:</em> *farts*</li>
+        <li><em>Purple:</em> Peek-a-boo!</li>
+        <li><em>Dark Blue:</em> Huh?</li>
+        <li><em>Pink:</em> Zoomies!!</li>
+        <li><em>Brown:</em> I'm full.</li>
+        <li><em>White:</em> *vomits* </li>
+      </ul>
+    </div>
+    <div id="contentPlatform" class="content" style="display:none;">
+      <strong>Shapes:</strong>
+      <p>Rectangle!</p>
+    </div>
+  </div>
+  
+  <!-- Load the Baby Mode game script -->
+  <script src="baby.js"></script>
+  
+  <!-- Attach event handlers -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const startMenu = document.getElementById("startMenu");
+      const startButton = document.getElementById("startButton");
+      const tutorialToggle = document.getElementById("tutorialToggle");
+      const tutorialGuide = document.getElementById("tutorialGuide");
+      const backgroundMusic = document.getElementById("backgroundMusic");
+      const tabPowerup = document.getElementById("tabPowerup");
+      const tabPlatform = document.getElementById("tabPlatform");
+      const contentPowerup = document.getElementById("contentPowerup");
+      const contentPlatform = document.getElementById("contentPlatform");
+
+      startButton.addEventListener("click", function() {
+        startMenu.style.display = "none";
+        tutorialToggle.style.display = "none";
+        tutorialGuide.style.display = "none";
+        backgroundMusic.play().catch(error => console.error("Playback error:", error));
+        if (typeof resetGame === "function") {
+          resetGame();
+        }
+      });
+
+      // Toggle the tutorial guide when the tutorial toggle is clicked.
+      tutorialToggle.addEventListener("click", function() {
+        if (tutorialGuide.style.display === "none" || tutorialGuide.style.display === "") {
+          tutorialGuide.style.display = "block";
+        } else {
+          tutorialGuide.style.display = "none";
+        }
+      });
+
+      // Add event listeners to tutorial buttons to switch content.
+      tabPowerup.addEventListener("click", function() {
+        contentPowerup.style.display = "block";
+        contentPlatform.style.display = "none";
+      });
+
+      tabPlatform.addEventListener("click", function() {
+        contentPowerup.style.display = "none";
+        contentPlatform.style.display = "block";
+      });
+    });
+  </script>
+</body>
+</html>

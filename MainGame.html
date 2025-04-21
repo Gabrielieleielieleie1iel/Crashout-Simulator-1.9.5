@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Crashout Simulator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <canvas id="gameCanvas" width="400" height="600"></canvas>
+  <div id="message"></div>
+  <button id="retryButton">Retry</button>
+  
+  <audio id="backgroundMusic" loop>
+    <source src="spazzmaticaPolka.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Start Menu -->
+  <div id="startMenu">
+    <h1>Infinite Platformer with Shifting Spike Walls and Rising Lava Alpha 1.9.5</h1>
+    <div id="difficultyOptions">
+      <button id="normalMode">Normal Mode</button>
+      <button id="purgatoryMode">Purgatory Mode</button>
+      <button id="babyMode">Baby Mode</button>
+	  <br>
+	  <button id="intotheDepths">Into the Depths</button>
+    </div>
+  </div>
+  
+  <!-- Tutorial Toggle & Guide -->
+  <div id="tutorialToggle">Tutorial (WE HIGHLY recommend)</div>
+  <div id="tutorialGuide">
+    <div>
+      <button id="tabPowerup">Cube Info</button>
+      <button id="tabPlatform">Platform Info</button>
+    </div>
+    <div id="contentPowerup" class="content">
+      <strong>Cube Info:</strong>
+      <p>Cubes are objects in the game that do various things, like powerups.</p>
+      <p>Learn about the different Cubes in the game and their functions:</p>
+      <ul>
+        <li><em>Yellow:</em> Boosts your overall jump strength.</li>
+        <li><em>Green:</em> Slows down time.</li>
+        <li><em>Red:</em> Kills you on contact.</li>
+        <li><em>Red Orange:</em> Grants a HUGE jump boost. But be careful where you fly off to.</li>
+        <li><em>Orange:</em> Teleports you near the lava.</li>
+        <li><em>Cyan:</em> Grants you temporary invincibility.</li>
+        <li><em>Purple:</em> Teleports you to a higher platform.</li>
+        <li><em>Dark Blue:</em> Instantly triggers a spike wall on a random side.</li>
+        <li><em>Pink:</em> Doubles the game's speed, but weakens your jump.</li>
+        <li><em>Brown:</em> Makes you larger, heavier, and slower.</li>
+        <li><em>White:</em> ϱniʜɈჸяɘvɘ ƨɈяɘvnI</li>
+      </ul>
+    </div>
+    <div id="contentPlatform" class="content" style="display:none;">
+      <strong>Platform Info:</strong>
+      <p>There are four types of platforms:</p>
+      <ul>
+        <li><em>Normal Platforms:</em> Your average platform. Provides a solid surface for landing.</li>
+        <li><em>Moving Platforms:</em> Same appearance as a Normal Platform, but moves at alternating speeds.</li>
+        <li><em>Weak Platforms:</em> These platforms are bee-lined in appearance and break after a few seconds of you landing on them.</li>
+        <li><em>Ghost Platforms:</em> Careful where you step. They're slightly brighter than Normal Platforms and fade out instantaneously when touched.</li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- Load the main game script -->
+  <script src="script.js"></script>
+  
+  <!-- Attach difficulty button events after script.js is loaded -->
+  <script>
+    // Wait until the document and script.js functions are loaded
+    document.addEventListener("DOMContentLoaded", function() {
+      const startMenu = document.getElementById("startMenu");
+      const normalModeBtn = document.getElementById("normalMode");
+      const purgatoryModeBtn = document.getElementById("purgatoryMode");
+      const babyModeBtn = document.getElementById("babyMode");
+	  const itDepthsBtn = document.getElementById("intotheDepths");
+      const tutorialToggle = document.getElementById("tutorialToggle");
+      const tutorialGuide = document.getElementById("tutorialGuide");
+      const backgroundMusic = document.getElementById("backgroundMusic");
+
+      // Normal Mode: Start the existing game by hiding menus and calling resetGame()
+      normalModeBtn.addEventListener("click", function() {
+        startMenu.style.display = "none";
+        tutorialToggle.style.display = "none";
+        tutorialGuide.style.display = "none";
+        backgroundMusic.play().catch(error => console.error("Playback error:", error));
+        if (typeof resetGame === "function") {
+          resetGame();
+        }
+      });
+
+      // Purgatory Mode: Redirect to a new file (placeholder)
+      purgatoryModeBtn.addEventListener("click", function() {
+        window.location.href = "purgatory.html";
+      });
+      
+      // Baby Mode: Redirect to the baby mode file
+      babyModeBtn.addEventListener("click", function() {
+        window.location.href = "baby.html";
+      });
+	  
+	  itDepthsBtn.addEventListener("click", function() {
+        window.location.href = "depths.html";
+      });
+    });
+  </script>
+</body>
+</html>
